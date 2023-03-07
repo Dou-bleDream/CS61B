@@ -7,6 +7,7 @@ public class TestBodyConstructor {
      *  Tests the Body constructor to make sure it's working correctly.
      */
     public static void main(String[] args) {
+
         checkBodyConstructor();
     }
 
