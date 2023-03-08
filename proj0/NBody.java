@@ -24,9 +24,14 @@ public class NBody {
         return R;
     }
 
-    public static Body[] readBodies(String file) {
-        Body[] bodies = null;
+    public static Planet[] readPlanets(String file) {
+        Planet[] bodies = null;
 //        提前定义值为null做为默认，后面就只需return一次
+//        按照gitbook完成proj0上传到autograde会报错。
+//        报错信息无法通过编译，提示找不到Planet.java。
+//        解决方法：
+//        首先将Body.java 重命名为 Planet.java ，并修改文件内所有Body。
+//        第二将Nbody.java 里面的 readBodies 方法 改为 readPlanets 方法 ，并更改相应得数组类型。
         try {
             File inputfile = new File(file);
             Scanner scanner = new Scanner(inputfile);
@@ -34,12 +39,12 @@ public class NBody {
             int Nrows = scanner.nextInt();
             scanner.nextDouble();
 //            跳过前俩数据
-            bodies = new Body[Nrows];
+            bodies = new Planet[Nrows];
             for (int i = 0; i < Nrows; i++) {
                 scanner.nextLine();
 //            移动到下一行
                 if (scanner.hasNextLine()) {
-                    bodies[i] = new Body(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(),
+                    bodies[i] = new Planet(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(),
                             scanner.nextDouble(), scanner.nextDouble(), scanner.next());
                 }
             }
@@ -55,7 +60,7 @@ public class NBody {
         double dt = Double.parseDouble(args[1]);
         String fileName = args[2];
         double radius = readRadius(fileName);
-        Body[] bodies = readBodies(fileName);
+        Planet[] bodies = readPlanets(fileName);
 
         
         StdDraw.enableDoubleBuffering();
@@ -83,8 +88,8 @@ public class NBody {
 
             String background = "images/starfield.jpg";
             StdDraw.picture(0, 0, background);
-            for(Body body: bodies){
-                body.draw();
+            for(Planet planet: bodies){
+                planet.draw();
             }
             StdDraw.show();
             StdDraw.pause(10);

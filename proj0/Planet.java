@@ -1,6 +1,6 @@
 
 
-    public class Body{
+    public class Planet{
         public final double G = 6.67e-11;
         public double xxPos;
         public double yyPos;
@@ -8,7 +8,7 @@
         public double yyVel;
         public double mass;
         public String imgFileName;
-        public Body(double xP, double yP, double xV,
+        public Planet(double xP, double yP, double xV,
                     double yV, double m, String img){
             xxPos = xP;
             yyPos = yP;
@@ -17,7 +17,7 @@
             mass =  m;
             imgFileName = img;
         }
-        public Body(Body b){
+        public Planet(Planet b){
             this.xxPos = b.xxPos;
             this.yyPos = b.yyPos;
             this.xxVel = b.xxVel;
@@ -25,30 +25,30 @@
             this.mass = b.mass;
             this.imgFileName = b.imgFileName;
         }
-        public double calcDistance(Body b){
+        public double calcDistance(Planet b){
             double r;
             double dx = b.xxPos - this.xxPos;
             double dy = b.yyPos - this.yyPos;
             r = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
             return r;
         }
-        public  double calcForceExertedBy(Body b){
+        public  double calcForceExertedBy(Planet b){
 
             double F = G * this.mass * b.mass / Math.pow(calcDistance(b),2);
             return F;
         }
-        public  double calcForceExertedByX(Body b){
+        public  double calcForceExertedByX(Planet b){
             double Fx = calcForceExertedBy(b) * (b.xxPos - this.xxPos) / calcDistance(b);
             return Fx;
         }
 
-        public  double calcForceExertedByY(Body b){
+        public  double calcForceExertedByY(Planet b){
             double Fy = calcForceExertedBy(b) * (b.yyPos - this.yyPos) / calcDistance(b);
             return Fy;
         }
-        public double calcNetForceExertedByX(Body[] allBodys) {
+        public double calcNetForceExertedByX(Planet[] allBodys) {
             double netForceX = 0;
-            for (Body body : allBodys) {
+            for (Planet body : allBodys) {
                 if (!this.equals(body)) {
                     netForceX += calcForceExertedByX(body);
                 }
@@ -56,9 +56,9 @@
             return netForceX;
         }
 
-        public double calcNetForceExertedByY(Body[] allBodys) {
+        public double calcNetForceExertedByY(Planet[] allBodys) {
             double netForceY = 0;
-            for (Body body : allBodys) {
+            for (Planet body : allBodys) {
                 if (!this.equals(body)) {
                     netForceY += calcForceExertedByY(body);
                 }
