@@ -1,7 +1,7 @@
 
 
     public class Planet{
-        public final double G = 6.67e-11;
+        private final double G = 6.67e-11;
         public double xxPos;
         public double yyPos;
         public double xxVel;
@@ -29,7 +29,7 @@
             double r;
             double dx = b.xxPos - this.xxPos;
             double dy = b.yyPos - this.yyPos;
-            r = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+            r = Math.pow(Math.pow(dx,2)+Math.pow(dy,2),0.5);
             return r;
         }
         public  double calcForceExertedBy(Planet b){
@@ -49,9 +49,10 @@
         public double calcNetForceExertedByX(Planet[] allBodys) {
             double netForceX = 0;
             for (Planet body : allBodys) {
-                if (!this.equals(body)) {
-                    netForceX += calcForceExertedByX(body);
+                if (this.equals(body)) {
+                    continue;
                 }
+                netForceX += calcForceExertedByX(body);
             }
             return netForceX;
         }
@@ -59,9 +60,10 @@
         public double calcNetForceExertedByY(Planet[] allBodys) {
             double netForceY = 0;
             for (Planet body : allBodys) {
-                if (!this.equals(body)) {
-                    netForceY += calcForceExertedByY(body);
+                if (this.equals(body)) {
+                    continue;
                 }
+                netForceY += calcForceExertedByY(body);
             }
             return netForceY;
         }
